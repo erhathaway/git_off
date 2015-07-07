@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [[ $1 == "add" && $2 == "-d" ]]
 then
   echo $3 >> empty.txt
@@ -8,10 +9,15 @@ then
   empty=$(<empty.txt)
   echo $empty
 
-# elif [[ $1 == "-rm" && 2 == "" && $3 == "" ]]
-# then
-
+elif [[ $1 == "-rm" && $2 && $3 == "" ]]
+  then
+  if grep -Fxq $2 empty.txt
+    then
+    echo `sed  /$2/d empty.txt` > empty.txt
+  else
+    echo "File not found"
+  fi
 else
   echo "Wrong syntax, idiot."
+
 fi
-# http://stackoverflow.com/questions/4749330/how-to-test-if-string-exists-in-file-with-bash-shell
