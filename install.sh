@@ -1,32 +1,32 @@
 #!/bin/bash
 
+#set location variables
 LOCATION=$HOME/.git_off
 USERFILE="git_off.sh"
 CRONFILE="git_push.sh"
 
+#make files executable
 chmod +x $USERFILE
 chmod +x $CRONFILE
 
+#if git_off directory doesn't exist
 if [ ! -d "$LOCATION" ]; then
   mkdir $LOCATION
 fi
 
-if [ ! -f "$LOCATION/$USERFILE" ]; then
-  cp $USERFILE $LOCATION/
-fi
+#copy files into directory
+cp -f $USERFILE $LOCATION/
+cp -f $CRONFILE $LOCATION/
 
-if [ ! -f "$LOCATION/$CRONFILE" ]; then
-  cp $CRONFILE $LOCATION
-fi
+#create tasks
+PATTERN="$CRONFILE"
+FILE=$(crontab -l)
 
-CRONTASKS=`crontab -l`
-CRONJOB =`grep $CRONFILE $CRONTASKS`
-
-if [ ! -z "$CRONJOB" ]; then
-  echo 'already a cron job!'
-else
-#   #add cron file to cron
-  line="* * * * * $LOCATION/$CRONFILE"
+if echo "$FILE" | grep -q "$PATTERN";
+ then
+  echo "already a cron job!"
+ else
+  line="0-59 * * * * $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
 fi
 
