@@ -53,6 +53,7 @@ if echo "$CONFIGFILE" | grep -q "$ALIAS";
   echo "alias already exists!"
 else
   echo "$ALIAS" >> ~/.$CONFIG
+  source ~/.$CONFIG
 fi
 
 
