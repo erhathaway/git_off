@@ -30,3 +30,33 @@ if echo "$FILE" | grep -q "$PATTERN";
   (crontab -l; echo "$line" ) | crontab -
 fi
 
+#acquire shell session path
+SHELLSESSION=$(echo $SHELL)
+
+#check which type of shell is being used
+if echo "$SHELLSESSION" | grep -q "bash";
+  then
+    echo "using bash"
+    CONFIG="bashrc"
+elif echo "$SHELLSESSION" | grep -q "zsh";
+  then
+    echo "using zsh"
+    CONFIG="zshrc"
+fi
+
+#Add alias to shell config file
+ALIAS='alias git_off='"$LOCATION"/"$USERFILE"
+CONFIGFILE=$(cat ~/.$CONFIG)
+
+if echo "$CONFIGFILE" | grep -q "$ALIAS";
+  then
+  echo "alias already exists!"
+else
+  echo "$ALIAS" >> ~/.$CONFIG
+fi
+
+
+
+
+
+
