@@ -18,6 +18,17 @@ fi
 cp -f $USERFILE $LOCATION/
 cp -f $CRONFILE $LOCATION/
 
+
+#check to make sure chron is running
+CRONPID=$(pgrep cron)
+
+if echo $CRONPID > 0;
+  then
+  echo 'cron running with PID:' $CRONPID
+else
+  echo 'ERROR: cron is not running'
+fi
+
 #create tasks
 PATTERN="$CRONFILE"
 FILE=$(crontab -l)
@@ -29,8 +40,6 @@ if echo "$FILE" | grep -q "$PATTERN";
   #for linux
   line="0-59 * * * * $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
-  #for macs
-  cp $LOCATION/$CRONFILE /Library/LaunchDaemons
 fi
 
 #acquire shell session path
@@ -58,8 +67,6 @@ else
   echo "$ALIAS" >> ~/.$CONFIG
   source ~/.$CONFIG
 fi
-
-
 
 
 

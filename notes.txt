@@ -1,4 +1,4 @@
-chron timings:
+#chron timings:
 
 # @reboot     Run once, at startup
 # @yearly     Run once  a year     "0 0 1 1 *"
@@ -9,7 +9,13 @@ chron timings:
 # @midnight   (same as  @daily)
 # @hourly     Run once  an hour    "0 * * * *"
 
-make file executable:
-
+#make file executable:
 chmod +x filename.sh
+
+#execute shell file
 ./filename.sh
+
+#test cron:
+pgrep cron
+#or
+pidof cron #doesn't work on osx
