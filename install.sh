@@ -26,8 +26,11 @@ if echo "$FILE" | grep -q "$PATTERN";
  then
   echo "already a cron job!"
  else
+  #for linux
   line="0-59 * * * * $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
+  #for macs
+  cp $LOCATION/$CRONFILE /Library/LaunchDaemons
 fi
 
 #acquire shell session path
