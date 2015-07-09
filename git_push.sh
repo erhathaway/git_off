@@ -1,11 +1,9 @@
 #!/bin/bash
 
-#send display to terminal in linux (get tty # with $ tty)
-# echo 'OMg' > /dev/pts/0
+# get file or directory off queue
+# cd into directory
+# if directory, git add -add
+# elif file, git add file
 
-#start gui program
-# env DISPLAY=:0 firefox &
-
-#log information (not working)
-# echo "Git push occured: $(date)" > ~/.gitoff/mybackup.log
-
+# git commit -m message
+# git push 

@@ -1,3 +1,22 @@
+-----------------
+### file stuff
+-----------------
+
+# make file executable:
+chmod +x filename.sh
+
+# execute shell file
+./filename.sh
+
+-----------------
+### cron
+-----------------
+
+# test cron:
+pgrep cron
+#or
+pidof cron #doesn't work on osx
+
 #chron timings:
 
 # @reboot     Run once, at startup
@@ -9,13 +28,15 @@
 # @midnight   (same as  @daily)
 # @hourly     Run once  an hour    "0 * * * *"
 
-#make file executable:
-chmod +x filename.sh
+-----------------
+### cron examples
+-----------------
+# send display to terminal in linux (get tty # with $ tty)
+echo 'OMg' > /dev/pts/0
 
-#execute shell file
-./filename.sh
+# start gui program
+env DISPLAY=:0 firefox &
 
-#test cron:
-pgrep cron
-#or
-pidof cron #doesn't work on osx
+# log information (not working)
+echo "Git push occured: $(date)" > ~/.gitoff/mybackup.log
+

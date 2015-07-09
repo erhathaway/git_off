@@ -17,12 +17,12 @@ fi
 #copy files into directory
 cp -f $USERFILE $LOCATION/
 cp -f $CRONFILE $LOCATION/
-
+touch $CRONFILE/queue.csv
 
 #check to make sure chron is running
 CRONPID=$(pgrep cron)
 
-if echo $CRONPID > 0;
+if echo $CRONPID;
   then
   echo 'cron running with PID:' $CRONPID
 else
