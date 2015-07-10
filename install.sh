@@ -4,6 +4,7 @@
 LOCATION=$HOME/.git_off
 USERFILE="git_off.sh"
 CRONFILE="git_push.sh"
+QUEUE="queue.csv"
 
 #make files executable
 chmod +x $USERFILE
@@ -17,7 +18,7 @@ fi
 #copy files into directory
 cp -f $USERFILE $LOCATION/
 cp -f $CRONFILE $LOCATION/
-touch $CRONFILE/queue.csv
+touch $LOCATION/$QUEUE
 
 #check to make sure chron is running
 CRONPID=$(pgrep cron)
