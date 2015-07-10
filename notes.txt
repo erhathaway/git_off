@@ -40,3 +40,11 @@ env DISPLAY=:0 firefox &
 # log information (not working)
 echo "Git push occured: $(date)" > ~/.gitoff/mybackup.log
 
+###Mac:
+env EDITOR=nano crontab -e
+
+# Says "test" once every minute
+*/1 * * * * say “test”
+
+# Opens Firefox every minute
+*/1 * * * * export DISPLAY=:0 && open /Applications/Firefox.app

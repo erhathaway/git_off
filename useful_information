@@ -1,8 +1,0 @@
-env EDITOR=nano crontab -e
-  -Opens Crontab in Mac
-
-*/1 * * * * say “test”
-  -Says "test" once every minute
-
-*/1 * * * * export DISPLAY=:0 && open /Applications/Firefox.app
-  -Opens Firefox every minute
