@@ -17,6 +17,17 @@ fi
 #copy files into directory
 cp -f $USERFILE $LOCATION/
 cp -f $CRONFILE $LOCATION/
+touch $CRONFILE/queue.csv
+
+#check to make sure chron is running
+CRONPID=$(pgrep cron)
+
+if echo $CRONPID;
+  then
+  echo 'cron running with PID:' $CRONPID
+else
+  echo 'ERROR: cron is not running'
+fi
 
 #create tasks
 PATTERN="$CRONFILE"
@@ -26,6 +37,7 @@ if echo "$FILE" | grep -q "$PATTERN";
  then
   echo "already a cron job!"
  else
+  #for linux
   line="0-59 * * * * $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
 fi
@@ -55,8 +67,6 @@ else
   echo "$ALIAS" >> ~/.$CONFIG
   source ~/.$CONFIG
 fi
-
-
 
 
 

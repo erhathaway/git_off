@@ -1,5 +1,0 @@
-hi
-hi
-hiii
-alias git_off="$LOCATION/$USERFILE"
-alias git_off=/home/ethan/.git_off/git_off.sh
