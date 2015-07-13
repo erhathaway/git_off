@@ -4,6 +4,7 @@
 LOCATION=$HOME/.git_off
 USERFILE="git_off.sh"
 CRONFILE="git_push.sh"
+QUEUE="queue.csv"
 
 #make files executable
 chmod +x $USERFILE
@@ -17,7 +18,7 @@ fi
 #copy files into directory
 cp -f $USERFILE $LOCATION/
 cp -f $CRONFILE $LOCATION/
-touch $CRONFILE/queue.csv
+touch $LOCATION/$QUEUE
 
 #check to make sure chron is running
 CRONPID=$(pgrep cron)
@@ -37,8 +38,7 @@ if echo "$FILE" | grep -q "$PATTERN";
  then
   echo "already a cron job!"
  else
-  #for linux
-  line="0-59 * * * * $LOCATION/$CRONFILE"
+  line="* * * * * $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
 fi
 

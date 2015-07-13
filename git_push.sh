@@ -1,9 +1,39 @@
 #!/bin/bash
 
-# get file or directory off queue
-# cd into directory
-# if directory, git add -add
-# elif file, git add file
+#Retrive item from queue
+LINE=$(sed -n '1p' queue.csv)
+sed -i '1d' queue.csv
 
-# git commit -m message
-# git push 
+#Parse item into components
+set -- "$LINE" 
+IFS=","; declare -a Array=($*) 
+#Set variables. Note: Itemtype is either a directory or file
+ITEMTYPE="${Array[0]}" 
+DIRECTORY="${Array[1]}" 
+NAME="${Array[2]}" 
+COMMENT="${Array[3]}" 
+
+#git status of remote
+GITSTATUS=$(cd $DIRECTORY && git pull)
+
+#make sure there are no merge conflicts
+if echo "$GITSTATUS" | grep -q "merge issue";
+  then
+  PROCEED=0
+else
+  PROCEED=1
+fi
+
+#make the commits or add to error queue
+if [ "$ITEMTYPE" = "directory" ] && [ "$PROCEED" = 1 ]; then
+  cd $DIRECTORY && git add -A && git commit -m $COMMENT
+elif [ "$ITEMTYPE" = "file" ] && [ "$PROCEED" = 1 ]; then
+  cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
+else
+  echo "${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> error_queue.csv 
+fi
+
+#if no errors, push to remote
+if [ "$PROCEED" = 1 ]; then
+  cd $DIRECTORY && git push
+fi
