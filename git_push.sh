@@ -13,12 +13,10 @@ DIRECTORY="${Array[1]}"
 NAME="${Array[2]}" 
 COMMENT="${Array[3]}" 
 
-# echo $ITEMTYPE
-# echo $DIRECTORY
-# echo $NAME
-# echo $COMMENT
+#git status of remote
 GITSTATUS=$(cd $DIRECTORY && git pull)
 
+#make sure there are no merge conflicts
 if echo "$GITSTATUS" | grep -q "merge issue";
   then
   PROCEED=0
@@ -26,16 +24,16 @@ else
   PROCEED=1
 fi
 
-
-echo $GITSTATUS
-echo $PROCEED
-
+#make the commits or add to error queue
 if [ "$ITEMTYPE" = "directory" ] && [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git add -A && git commit -m $COMMENT
 elif [ "$ITEMTYPE" = "file" ] && [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
+else
+  echo "${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> error_queue.csv 
 fi
 
-if [ "$PROCEED" = 1]; then
+#if no errors, push to remote
+if [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git push
 fi
