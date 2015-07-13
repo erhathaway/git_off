@@ -9,9 +9,24 @@ set -- "$LINE"
 IFS=","; declare -a Array=($*) 
 #Set variables. Note: Itemtype is either a directory or file
 ITEMTYPE="${Array[0]}" 
-NAME="${Array[1]}" 
-COMMENT="${Array[2]}" 
+DIRECTORY="${Array[1]}" 
+NAME="${Array[2]}" 
+COMMENT="${Array[3]}" 
 
+echo $ITEMTYPE
+echo $DIRECTORY
+echo $NAME
+echo $COMMENT
+
+if [ "$ITEMTYPE" = "directory" ]; then
+  cd $DIRECTORY && git status && git add -A
+  echo hello
+  git commit -m "$COMMENT"
+elif [ "$ITEMTYPE" = "file" ]; then
+  cd $DIRECTORY && git status
+  git add "$NAME"
+  git commit -m "$COMMENT"
+fi
 
 
 # get file or directory off queue
