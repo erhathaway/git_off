@@ -36,4 +36,6 @@ elif [ "$ITEMTYPE" = "file" ] && [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 fi
 
-# cd $DIRECTORY && git push
+if [ "$PROCEED" = 1]; then
+  cd $DIRECTORY && git push
+fi
