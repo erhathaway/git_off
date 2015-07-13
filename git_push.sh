@@ -19,9 +19,7 @@ echo $NAME
 echo $COMMENT
 
 if [ "$ITEMTYPE" = "directory" ]; then
-  cd $DIRECTORY && git status && git add -A
-  echo hello
-  git commit -m "$COMMENT"
+  cd $DIRECTORY && git status && git add -A && git commit -m "$COMMENT"
 elif [ "$ITEMTYPE" = "file" ]; then
   cd $DIRECTORY && git status
   git add "$NAME"
