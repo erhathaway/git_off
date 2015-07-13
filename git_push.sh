@@ -18,10 +18,12 @@ COMMENT="${Array[3]}"
 # echo $NAME
 # echo $COMMENT
 
+cd $DIRECTORY && git pull
+
 if [ "$ITEMTYPE" = "directory" ]; then
   cd $DIRECTORY && git add -A && git commit -m $COMMENT
 elif [ "$ITEMTYPE" = "file" ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 fi
 
-cd 
+cd $DIRECTORY && git push
