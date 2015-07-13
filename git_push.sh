@@ -17,13 +17,23 @@ COMMENT="${Array[3]}"
 # echo $DIRECTORY
 # echo $NAME
 # echo $COMMENT
+GITSTATUS=$(cd $DIRECTORY && git pull)
 
-cd $DIRECTORY && git pull
+if echo "$GITSTATUS" | grep -q "merge issue";
+  then
+  PROCEED=0
+else
+  PROCEED=1
+fi
 
-if [ "$ITEMTYPE" = "directory" ]; then
+
+echo $GITSTATUS
+echo $PROCEED
+
+if [ "$ITEMTYPE" = "directory" ] && [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git add -A && git commit -m $COMMENT
-elif [ "$ITEMTYPE" = "file" ]; then
+elif [ "$ITEMTYPE" = "file" ] && [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 fi
 
-cd $DIRECTORY && git push
+# cd $DIRECTORY && git push
