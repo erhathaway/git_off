@@ -1,22 +1,24 @@
 #!/bin/bash
 
+BASEDIR=$(dirname $0)
+QUEUE=$BASEDIR/queue.csv
+LOG=$BASEDIR/log.csv
+
 # add directory to queue:
 if [[ $1 == "add" && $2 == "-A" ]] || [[ $1 == "add" && $2 == "." ]]
   then
   var=$(pwd)
-  echo "directory,$var,,\"$3\"" >> queue.csv
+  echo "directory,$var,,\"$3\"" >> $QUEUE
 
 # add file to queue:
 elif [[ $1 == "add" ]]
   then
   var=$(pwd)
-  echo "file,$var,$2,\"$3\"" >> queue.csv
+  echo "file,$var,$2,\"$3\"" >> $QUEUE
 
 # display queue status:
 elif [[ $1 == "status" ]]
   then
-  # queue=$(<queue.csv)
-  # echo $queue
   ((var=1))
   echo $'\tID \tItem Type  \tItem  
   --------------------------------------------------------------------------------------------------'
@@ -39,13 +41,13 @@ elif [[ $1 == "status" ]]
         echo $'\t' $var $'\t' "file:      " $DIRECTORY/$NAME$'\t\t'  $COMMENT
     fi      
     ((var=var+1))  
-  done <queue.csv 
+  done <$QUEUE 
 
 #remove item from queue by queue ID
 elif [[ $1 == "-rm" && $2 && $3 == "" ]]
   then
-  sed -n "$2p" queue.csv >> log.csv
-  sed -i".bak" "$2d" queue.csv
+  sed -n "$2p" $QUEUE >> $LOG
+  sed -i".bak" "$2d" $QUEUE
 
 # display available commands
 else
