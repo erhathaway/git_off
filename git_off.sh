@@ -17,6 +17,9 @@ elif [[ $1 == "status" ]]
   then
   # queue=$(<queue.csv)
   # echo $queue
+  ((var=1))
+  echo $'\tID \tItem Type  \tItem  
+  --------------------------------------------------------------------------------------------------'
   while read line           
   do  
     
@@ -31,32 +34,29 @@ elif [[ $1 == "status" ]]
     COMMENT="${Array[3]}"
     if [[ $ITEMTYPE == "directory" ]] 
       then           
-        echo "directory: " $DIRECTORY "  --" $COMMENT
+        echo $'\t' $var $'\t' "directory: " $DIRECTORY $'\t\t' $COMMENT
     else
-        echo "file:      " $DIRECTORY/$NAME "  --" $COMMENT
-    fi        
+        echo $'\t' $var $'\t' "file:      " $DIRECTORY/$NAME$'\t\t'  $COMMENT
+    fi      
+    ((var=var+1))  
   done <queue.csv 
-#remove file from queue
+
+#remove item from queue by queue ID
 elif [[ $1 == "-rm" && $2 && $3 == "" ]]
   then
-  if grep -Fxq $2 queue.csv
-    then
-    echo `sed  /$2/d queue.csv` > queue.csv
-     perl -p -i -e 's/\s/\n/g' queue.csv
-  else
-    echo "File not found"
-  fi
+  sed -n "$2p" queue.csv >> log.csv
+  sed -i".bak" "$2d" queue.csv
 
 # display available commands
 else
   echo $'Syntax Error\n 
 Available commands\n
-  add -A        adds a directory
-  add .         adds a directory
-  add filename  adds a file
+  add -A        add directory
+  add .         add directory
+  add filename  add file
 
-  status        displays current queue
+  status        display current queue
 
-  -rm queue_id  removes an item from the queue'
+  -rm queue_id  remove an item from the queue'
 fi
 
