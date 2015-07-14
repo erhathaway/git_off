@@ -34,6 +34,10 @@ else
 fi
 
 #if no errors, push to remote
+DATE=${DATE}
 if [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git push
+  echo "${DATE},SUCCESS,${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> log.csv
+else
+  echo "${DATE},ERROR,${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> log.csv
 fi
