@@ -7,15 +7,16 @@ LOG=$BASEDIR/log.csv
 # add directory to queue:
 if [[ $1 == "add" && $2 == "-A" ]] || [[ $1 == "add" && $2 == "." ]]
   then
-    var=$(pwd)
-    echo "directory,$var,,\"$3\"" >> $QUEUE
+  var=$(pwd)
+  echo "directory,$var,,\"$3\"" >> $QUEUE
 
 # add file to queue:
 elif [[ $1 == "add" ]]
   then
-    var=$(pwd)
-    echo "file,$var,$2,\"$3\"" >> $QUEUE
+  var=$(pwd)
+  echo "file,$var,$2,\"$3\"" >> $QUEUE
 
+# add commit message
 elif [[ $1 == "commit" && $2 == "-m" ]]
   then
     var=$(tail -2 queue.csv | head -1)
@@ -32,11 +33,11 @@ elif [[ $1 == "ll" ]]
 # display queue status:
 elif [[ $1 == "status" ]]
   then
-    ((var=1))
-    echo $'\tID \tItem Type  \tItem
-    --------------------------------------------------------------------------------------------------'
-    while read line
-      do
+  ((var=1))
+  echo $'\tID \tItem Type  \tItem
+  ---------------------------------------------------------------------'
+  while read line
+  do
 
     #Parse item into components
     set -- "$line"

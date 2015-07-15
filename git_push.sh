@@ -1,8 +1,13 @@
 #!/bin/bash
 
+BASEDIR=$(dirname $0)
+QUEUE=$BASEDIR/queue.csv
+ERRORQUEUE=$BASEDIR/error_queue.csv
+LOG=$BASEDIR/log.csv
+
 #Retrive item from queue
 LINE=$(sed -n '1p' queue.csv)
-sed -i '1d' queue.csv
+sed -i '1d' $QUEUE
 
 #Parse item into components
 set -- "$LINE" 
@@ -30,10 +35,13 @@ if [ "$ITEMTYPE" = "directory" ] && [ "$PROCEED" = 1 ]; then
 elif [ "$ITEMTYPE" = "file" ] && [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 else
-  echo "${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> error_queue.csv 
+  echo "${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> $ERRORQUEUE 
 fi
 
 #if no errors, push to remote
 if [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git push
+  echo "$(date),SUCCESS,${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> $LOG
+else
+  echo "$(date),ERROR,${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> $LOG
 fi
