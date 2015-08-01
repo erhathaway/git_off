@@ -38,7 +38,7 @@ fi
 
 #make the commits if possible
 if [ "$ITEMTYPE" == "directory" ] && [ "$PROCEED" == 1 ]; then
-  cd $DIRECTORY && git add -A && git commit -m $COMMENT
+  COMMIT=$(cd $DIRECTORY && git add -A && git commit -m $COMMENT 2>&1)
 elif [ "$ITEMTYPE" == "file" ] && [ "$PROCEED" == 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 fi
