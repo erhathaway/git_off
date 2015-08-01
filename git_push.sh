@@ -51,7 +51,7 @@ STATUS=""
 echo 'hello'
 git push |
   while IFS= read -r line; do lines[i]="$line"; ((i++)); done
-  echo "${lines[1]}" )
+  echo "${lines[1]}" 
 
 echo 'hi'
 echo $STATUS
