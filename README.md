@@ -1,21 +1,21 @@
 # git_off
-Maintain that meaningless streak with a git code queue!
+**Purpose:** Maintain that meaningless streak with a git code queue!
 
-Available commands
-  add -A        add directory
-  add .         add directory
-  add filename  add file
+**Use:** Similar to git except files or directories you add are put into a queue. Once a day, the queue is checked and the first item is commited and pushed up to the remote repo
 
-  commit -m     commit message
+##Available commands
 
-  status        display current queue
-
-  -rm queue_id  remove an item from the queue
-  -ll           display last item added to queue'
+- add -A        add directory
+- add .         add directory
+- add filename  add file
+- commit -m     commit message
+- status        display current queue
+- rm queue_id  remove an item from the queue
+- ll           display last item added to queue'
   
   
-Current issues:
+##Current issues:
 
-git_off status sometimes removes an item from the queue. The status code needs to be fixed!
+1. git_off status sometimes removes an item from the queue. The status code needs to be fixed!
 
-install.sh can mess up a current queue and delete items. Possibly related to the above error?
+2. install.sh can mess up a current queue and delete items. Possibly related to the above error?
