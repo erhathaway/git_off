@@ -79,6 +79,8 @@ Available commands\n
   add .         add directory
   add filename  add file
 
+  commit -m     commit message
+
   status        display current queue
 
   -rm queue_id  remove an item from the queue
