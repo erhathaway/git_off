@@ -14,7 +14,7 @@ LOG=$BASEDIR/log.csv
 
 #Retrive item from queue
 LINE=$(sed -n '1p' $QUEUE) #queue.csv)
-sed -i '1d' $QUEUE
+# sed -i '1d' $QUEUE
 
 #Parse item into components
 set -- "$LINE"
@@ -77,7 +77,7 @@ TIME=$(date +"%m-%d-%Y %r")
 # log status
 if [ "$PROCEED" == 1 ]; then
   echo "$TIME, SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
-
+  echo "git_off: SUCCESS in pushing to remote repo"
 else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
   # echo "$TIME, ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
