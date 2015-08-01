@@ -40,7 +40,7 @@ elif [[ $1 == "commit" && $2 == "-m" ]]
     SIZE=${#ITEM}
     if [ $SIZE -gt 0 ]
       then
-      echo "$ITEM,\"$3\"" >> $QUEUE
+      echo "$ITEM,$3" >> $QUEUE
       #clear the temp item
       echo ""> $NEWITEM
     else
@@ -97,18 +97,17 @@ elif [[ $1 == "status" ]]
   done < "$QUEUE"
 
 # display log
-
 elif [[ $1 == "log" ]]
   then
-  if [[ $2 == "-e" ]]
+  if [[ $2 == "-e" && $3 == "--clear" ]]
+    then
+      echo > $ERRORQUEUE
+  elif [[ $2 == "-e" ]]
     then
       cat "$ERRORQUEUE"
   elif [[ $2 == "--clear" ]]
     then
       echo > $LOG
-  elif [[ $2 == "-e" && $3 == "--clear"]]
-    then
-      echo > $ERRORQUEUE
   else
     cat "$LOG"
   fi

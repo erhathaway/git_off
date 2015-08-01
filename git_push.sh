@@ -6,12 +6,12 @@ ERRORQUEUE=$BASEDIR/error_queue.csv
 LOG=$BASEDIR/log.csv
 
 #Retrive item from queue
-LINE=$(sed -n '1p' queue.csv)
+LINE=$(sed -n '1p' $QUEUE) #queue.csv)
 sed -i '1d' $QUEUE
 
 #Parse item into components
 set -- "$LINE"
-IFS=","; declare -a Array=($*) 
+IFS=","; declare -a Array=($*)
 #Set variables. Note: Itemtype is either a directory or file
 ITEMTYPE="${Array[0]}"
 DIRECTORY="${Array[1]}"
@@ -35,7 +35,7 @@ if [ "$ITEMTYPE" = "directory" ] && [ "$PROCEED" = 1 ]; then
 elif [ "$ITEMTYPE" = "file" ] && [ "$PROCEED" = 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 else
-  echo "${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> $ERRORQUEUE
+  echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
 fi
 
 #if no errors, push to remote

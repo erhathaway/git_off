@@ -3,7 +3,7 @@
 #set location variables
 LOCATION=$HOME/.git_off
 USERFILE="git_off.sh"
-CRONFILE="git_push.sh"
+CRONFILE="git_check.sh"
 QUEUE="queue.csv"
 
 #make files executable
@@ -38,7 +38,7 @@ if echo "$FILE" | grep -q "$PATTERN";
  then
   echo "already a cron job!"
  else
-  line="0 * * * * $LOCATION/$CRONFILE"
+  line="* * * * * $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
 fi
 
