@@ -34,7 +34,7 @@ if echo "$GITSTATUS" | grep -q "merge issue";
   PROCEED=0
 else
   PROCEED=1
-  echo "no merge issues found!"
+  echo "git_off: no merge issues found!"
 fi
 
 #make the commits if possible
@@ -52,7 +52,7 @@ if echo "$COMMIT" | grep -q "$COMMITPATTERN1";
    PROCEED=0
  else
    PROCEED=1
-   echo "no commit issues found!"
+   echo "git_off: no commit issues found!"
 fi
 
 #if no errors, push to remote
@@ -67,7 +67,7 @@ if [ "$PROCEED" == 1 ]; then
   if echo "$PUSH" | grep -q "$PUSHPATTERN1";
    then
      PROCEED=1
-     echo "no push issues found!"
+     echo "git_off: no push issues found!"
    else
      PROCEED=0
   fi
