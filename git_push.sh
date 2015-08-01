@@ -4,6 +4,9 @@
 
 #for testing
 terminal="/dev/pts/11"
+clear
+echo $HOME > terminal
+echo "-------------" > terminal
 
 #store file locations
 BASEDIR=$(dirname $0)
