@@ -1,7 +1,7 @@
 # git_off
 **Purpose:** Maintain that meaningless streak with a git code queue!
 
-**Use:** Similar to git except files or directories you add are put into a queue. Once a day, the queue is checked and the first item is commited and pushed up to the remote repo
+**Use:** Similar to git except files or directories you add are put into a queue. Once a day, the queue is checked, and the first item is commited and pushed up to the remote repo
 
 ##Available commands
 
