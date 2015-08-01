@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $HOME/.bash_profile
+# source $HOME/.bash_profile
 
 #for testing
 terminal="/dev/pts/11"
