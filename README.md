@@ -20,4 +20,4 @@
 
 2. install.sh can mess up a current queue and delete items. Possibly related to the above error?
 
-3. If your computer is not on when the cron job runs, git_off will miss commiting an item for the day. There needs to be some redudant cron logic to check every hour or so that the job actually was run. 
+3. If your computer is not on when the cron job is scheduled to run, git_off will miss commiting an item for the day. There needs to be some redudant cron logic to check every hour or so that the job actually was run. 
