@@ -38,7 +38,7 @@ if echo "$FILE" | grep -q "$PATTERN";
  then
   echo "already a cron job!"
  else
-  line="* * * * * $LOCATION/$CRONFILE"
+  line="0 * * * * $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
 fi
 

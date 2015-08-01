@@ -39,7 +39,7 @@ elif [[ $1 == "commit" && $2 == "-m" ]]
     SIZE=${#ITEM}
     if [ $SIZE -gt 0 ]
       then
-      echo "$ITEM,$3" >> $QUEUE
+      echo "$ITEM,\"$3\"" >> $QUEUE
       #clear the temp item
       echo ""> $NEWITEM
     else
@@ -49,7 +49,24 @@ elif [[ $1 == "commit" && $2 == "-m" ]]
 #display last line added to queue
 elif [[ $1 == "-ll" ]]
   then
-    echo $(tail -2 queue.csv | head -1)
+    LASTLINE=$(tail -1 $QUEUE | head -1)
+    IFS=', ' read -a LLARRAY <<< "$LASTLINE"
+
+    NUMOFLINES=$(wc -l < "$QUEUE")
+
+    ITEMTYPE="${LLARRAY[0]}"
+    DIRECTORY="${LLARRAY[1]}"
+    NAME="${LLARRAY[2]}"
+    COMMENT="${LLARRAY[3]}"
+
+    echo $'\tID \tItem Type  \tItem
+    ---------------------------------------------------------------------'
+    if [[ $ITEMTYPE == "directory" ]]
+      then
+        echo $'\t' $NUMOFLINES $'\t' "directory: " $DIRECTORY $'\t\t' $COMMENT
+    else
+        echo $'\t' $NUMOFLINES $'\t' "file:      " $DIRECTORY/$NAME$'\t\t'  $COMMENT
+    fi
 
 # display queue status:
 elif [[ $1 == "status" ]]
@@ -76,7 +93,7 @@ elif [[ $1 == "status" ]]
         echo $'\t' $var $'\t' "file:      " $DIRECTORY/$NAME$'\t\t'  $COMMENT
     fi
     ((var=var+1))
-  done <$QUEUE
+  done < "$QUEUE"
 
 #remove item from queue by queue ID
 elif [[ $1 == "-rm" && $2 ]]
