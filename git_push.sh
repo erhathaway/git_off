@@ -49,8 +49,8 @@ fi
 #check push  status
 STATUS=""
 echo 'hello'
-stdbuf -oL git push |
-  while IFS= read -r line; do lines[i]="$line"; ((i++)); done
+stdbuf -oL git push  |
+  while IFS= read -r line; do lines[i]=2>&1; ((i++)); done
   echo "${lines[1]}"
 
 echo 'hi'
