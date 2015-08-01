@@ -40,25 +40,36 @@ fi
 if [ "$ITEMTYPE" == "directory" ] && [ "$PROCEED" == 1 ]; then
   COMMIT=$(cd $DIRECTORY && git add -A && git commit -m $COMMENT 2>&1)
 elif [ "$ITEMTYPE" == "file" ] && [ "$PROCEED" == 1 ]; then
-  cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
+  COMMIT=$(cd $DIRECTORY && git add $NAME && git commit -m $COMMENT 2>&1)
 fi
-echo $COMMIT
+
+# check the commit status
+COMMITPATTERN1="nothing to commit"
+
+if echo "$COMMIT" | grep -q -e "$COMMITPATTERN1";
+ then
+   PROCEED=0
+ else
+   PROCEED=1
+fi
+
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
   PUSH=$(cd $DIRECTORY && git push --progress 2>&1)
+
+  #check push status
+  PUSHPATTERN1="Writing objects: 100%"
+  # PATTERN2="Total" #other patterns that may be helpful
+  # PATTERN3="done."
+
+  if echo "$PUSH" | grep -q -e "$PUSHPATTERN1";
+   then
+     PROCEED=1
+   else
+     PROCEED=0
+  fi
 fi
 
-#check push status
-PATTERN1="Writing objects: 100%"
-# PATTERN2="Total" #other patterns that may be helpful
-# PATTERN3="done."
-
-if echo "$PUSH" | grep -q -e "$PATTERN1";
- then
-   PROCEED=1
- else
-   PROCEED=0
-fi
 
 #get time
 TIME=$(date +"%m-%d-%Y %r")
