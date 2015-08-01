@@ -33,6 +33,7 @@ COMMENT="${Array[3]}"
 
 #git status of remote
 GITSTATUS=$(cd $DIRECTORY && git pull 2>&1)
+echo $GITSTATUS > $terminal
 
 #make sure there are no merge conflicts
 if echo "$GITSTATUS" | grep -q "merge issue";
@@ -49,6 +50,7 @@ if [ "$ITEMTYPE" == "directory" ] && [ "$PROCEED" == 1 ]; then
 elif [ "$ITEMTYPE" == "file" ] && [ "$PROCEED" == 1 ]; then
   COMMIT=$(cd $DIRECTORY && git add $NAME && git commit -m $COMMENT 2>&1)
 fi
+echo $COMMIT > $terminal
 
 # check the commit status
 COMMITPATTERN1="nothing to commit"
@@ -64,6 +66,7 @@ fi
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
   PUSH=$(cd $DIRECTORY && git push --progress 2>&1)
+  echo $PUSH > $terminal
 
   #check push status
   PUSHPATTERN1="Writing objects: 100%"
