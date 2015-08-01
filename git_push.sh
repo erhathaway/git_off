@@ -43,7 +43,7 @@ else
 fi
 
 #if no errors, push to remote
-if [ "$PROCEED" = 1 ]; then
+if [ "$PROCEED" == 1 ]; then
   # cd $DIRECTORY && git push
   echo "$(date),SUCCESS,$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $LOG
 else
