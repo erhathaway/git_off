@@ -15,7 +15,20 @@ if [[ $1 == "add" && $2 == "-A" ]] || [[ $1 == "add" && $2 == "." ]]
 elif [[ $1 == "add" ]]
   then
   var=$(pwd)
-  echo "file,$var,$2" > $NEWITEM
+  FILENAMESIZE=${#2}
+  # check to make sure an input was provided
+  if [ $FILENAMESIZE -gt 0 ]
+    then
+      # check if file exists
+      if [ -e "$var/$2" ]
+        then
+        echo "file,$var,$2" > $NEWITEM
+      else
+        echo "Could not find file"
+      fi
+  else
+    echo "Please specify a file to add to the queue"
+  fi
 
 # add commit message
 elif [[ $1 == "commit" && $2 == "-m" ]]

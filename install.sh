@@ -23,7 +23,7 @@ touch $LOCATION/$QUEUE
 #check to make sure chron is running
 CRONPID=$(pgrep cron)
 
-if echo $CRONPID;
+if [ ${#CRONPID} -gt 0 ];
   then
   echo 'cron running with PID:' $CRONPID
 else
@@ -67,7 +67,3 @@ else
   echo "$ALIAS" >> ~/.$CONFIG
   source ~/.$CONFIG
 fi
-
-
-
-
