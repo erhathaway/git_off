@@ -6,6 +6,7 @@
 terminal="/dev/pts/11"
 echo "-------------" > $terminal
 echo $HOME > $terminal
+printenv > $terminal
 echo "-------------" > $terminal
 
 #store file locations
