@@ -5,13 +5,13 @@
 
 ##Available commands
 
-- add -A        add directory
-- add .         add directory
-- add filename  add file
-- commit -m     commit message
-- status        display current queue
-- rm queue_id  remove an item from the queue
-- ll           display last item added to queue'
+- `add -A`        add directory
+- `add .`         add directory
+- `add filename`  add file
+- `commit -m`     commit message
+- `status`        display current queue
+- `rm queue_id`  remove an item from the queue
+- `ll`           display last item added to queue'
   
   
 ##Current issues:
