@@ -12,15 +12,17 @@
 
 ##Available commands
 
-- `add -A`       add directory
-- `add .`         add directory
-- `add filename`  add file
-- `commit -m "message"`     commit message
-- `status`        display current queue
-- `log`           display log of successful commits
-- `log -e`        display log of unsuccessful commits
-- `rm queue_id`   remove an item from the queue
-- `ll`            display last item added to queue'
+- `add -A`              add directory
+- `add .`               add directory
+- `add filename`        add file
+- `commit -m "message"` commit message
+- `status`              display current queue
+- `log`                 display log of successful commits
+- `log -e`              display error queue log (aka unsuccessful commits)
+- `log --clear`         clear log
+- `log -e --clear`      clear error queue log
+- `rm queue_id`         remove an item from the queue
+- `ll`                  display last item added to queue'
 
 
 ## TODO / Current issues:

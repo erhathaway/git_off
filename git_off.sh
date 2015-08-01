@@ -103,6 +103,12 @@ elif [[ $1 == "log" ]]
   if [[ $2 == "-e" ]]
     then
       cat "$ERRORQUEUE"
+  elif [[ $2 == "--clear" ]]
+    then
+      echo > $LOG
+  elif [[ $2 == "-e" && $3 == "--clear"]]
+    then
+      echo > $ERRORQUEUE
   else
     cat "$LOG"
   fi
@@ -117,18 +123,20 @@ elif [[ $1 == "-rm" && $2 ]]
 else
   echo $'Syntax Error\n
 Available commands\n
-  add -A        add directory
-  add .         add directory
-  add filename  add file
+  add -A         add directory
+  add .          add directory
+  add filename   add file
 
-  commit -m     commit message
+  commit -m      commit message
 
-  status        display current queue
-  log           display log of successful commits
-  log -e        display log of unsuccessful commits
+  status         display current queue
+  log            display log of successful commits
+  log -e         display error queue log (aka unsuccessful commits)
+  log --clear    clear log
+  log -e --clear clear error queue log
 
 
-  -rm queue_id  remove an item from the queue
-  -ll           display last item added to queue'
+  -rm queue_id   remove an item from the queue
+  -ll            display last item added to queue'
 
 fi
