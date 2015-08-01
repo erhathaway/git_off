@@ -34,6 +34,7 @@ if echo "$GITSTATUS" | grep -q "merge issue";
   PROCEED=0
 else
   PROCEED=1
+  echo "no merge issues found!"
 fi
 
 #make the commits if possible
