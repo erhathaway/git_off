@@ -4,6 +4,7 @@ BASEDIR=$(dirname $0)
 QUEUE=$BASEDIR/queue.csv
 NEWITEM=$BASEDIR/new_item.csv
 LOG=$BASEDIR/log.csv
+ERRORQUEUE=$BASEDIR/error_queue.csv
 
 # add directory to queue:
 if [[ $1 == "add" && $2 == "-A" ]] || [[ $1 == "add" && $2 == "." ]]
@@ -95,6 +96,17 @@ elif [[ $1 == "status" ]]
     ((var=var+1))
   done < "$QUEUE"
 
+# display log
+
+elif [[ $1 == "log" ]]
+  then
+  if [[ $2 == "-e" ]]
+    then
+      cat "$ERRORQUEUE"
+  else
+    cat "$LOG"
+  fi
+
 #remove item from queue by queue ID
 elif [[ $1 == "-rm" && $2 ]]
   then
@@ -112,6 +124,9 @@ Available commands\n
   commit -m     commit message
 
   status        display current queue
+  log           display log of successful commits
+  log -e        display log of unsuccessful commits
+
 
   -rm queue_id  remove an item from the queue
   -ll           display last item added to queue'
