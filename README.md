@@ -3,6 +3,13 @@
 
 **Use:** Similar to git except files or directories you add are put into a queue. Once a day, the queue is checked, and the first item is commited and pushed up to the remote repo
 
+**Install**
+
+1. Clone / download repo
+2. `cd` into repo
+3. run the install file: `./install.sh`
+4. use git_off the same way you would Git: `git_off` *some command*
+
 ##Available commands
 
 - `add -A`        add directory
