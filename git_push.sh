@@ -45,6 +45,7 @@ else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
 fi
 
+echo 'hi'
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
   # cd $DIRECTORY && git push
