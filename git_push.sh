@@ -53,7 +53,7 @@ PATTERN1="Writing objects: 100%"
 PATTERN2="Total"
 PATTERN3="done."
 
-if echo "$PUSH" | grep -q "$PATTERN1";
+if echo "$PUSH" | grep -q -e "$PATTERN1" -e "$PATTERN2" -e "$PATTERN3";
  then
    PROCEED=1
  else
