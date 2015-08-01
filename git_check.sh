@@ -10,15 +10,22 @@ fi
 
 GITPUSH=$BASEDIR/git_push.sh
 LOG=$BASEDIR/log.csv
+QUEUE=$BASEDIR/queue.csv
 
-TIME=$(date +"%m-%d-%Y-h")
 
-PATTERN=$TIME
-FILE=$(cat $LOG)
+NUMOFLINES=$(cat $QUEUE | wc -l )
 
-if echo "$FILE" | grep -q "$PATTERN";
- then
-  "already commited"
- else
-  ($GITPUSH)
+if [ $NUMOFLINES -gt 0 ]
+  then
+  TIME=$(date +"%m-%d-%Y-h")
+
+  PATTERN=$TIME
+  FILE=$(cat $LOG)
+
+  if echo "$FILE" | grep -q "$PATTERN";
+   then
+    "already commited"
+   else
+    ($GITPUSH)
+  fi
 fi
