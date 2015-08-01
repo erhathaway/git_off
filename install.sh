@@ -40,7 +40,7 @@ if echo "$FILE" | grep -q "$PATTERN";
  then
   echo "already a cron job!"
  else
-  line="*/30 * * * * $LOCATION/$CRONFILE"
+  line="*/30 * * * * . $HOME/.profile; $LOCATION/$CRONFILE"
   (crontab -l; echo "$line" ) | crontab -
 fi
 
