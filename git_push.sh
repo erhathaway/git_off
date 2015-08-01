@@ -49,7 +49,7 @@ fi
 #check push  status
 STATUS=""
 echo 'hello'
-PUSH=$( {cd $DIRECTORY && git push } |
+git push |
   while IFS= read -r line; do lines[i]="$line"; ((i++)); done
   echo "${lines[1]}" )
 
