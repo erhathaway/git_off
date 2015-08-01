@@ -52,6 +52,7 @@ if echo "$COMMIT" | grep -q "$COMMITPATTERN1";
    PROCEED=0
  else
    PROCEED=1
+   echo "no commit issues found!"
 fi
 
 #if no errors, push to remote
@@ -66,6 +67,7 @@ if [ "$PROCEED" == 1 ]; then
   if echo "$PUSH" | grep -q "$PUSHPATTERN1";
    then
      PROCEED=1
+     echo "no push issues found!"
    else
      PROCEED=0
   fi
