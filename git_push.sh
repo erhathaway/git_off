@@ -51,7 +51,7 @@ if [ "$PROCEED" == 1 ]; then
   # cd $BASEDIR
   # echo $BASEDIR
   # echo `pwd`
-  eval "'$(date), SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT' >> $LOG"
+  pr "$(date), SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
 else
   echo "$(date), ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
 fi
