@@ -34,7 +34,7 @@ elif [[ $1 == "commit" && $2 == "-m" ]]
     fi
 
 #display last line added to queue
-elif [[ $1 == "ll" ]]
+elif [[ $1 == "-ll" ]]
   then
     echo $(tail -2 queue.csv | head -1)
 
@@ -81,5 +81,7 @@ Available commands\n
 
   status        display current queue
 
-  -rm queue_id  remove an item from the queue'
+  -rm queue_id  remove an item from the queue
+  -ll           display last item added to queue'
+
 fi
