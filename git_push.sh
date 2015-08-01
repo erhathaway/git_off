@@ -32,7 +32,7 @@ NAME="${Array[2]}"
 COMMENT="${Array[3]}"
 
 #git status of remote
-GITSTATUS=$(cd $DIRECTORY && git pull)
+GITSTATUS=$(cd $DIRECTORY && git pull 2>&1)
 
 #make sure there are no merge conflicts
 if echo "$GITSTATUS" | grep -q "merge issue";
