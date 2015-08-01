@@ -2,28 +2,36 @@
 
 BASEDIR=$(dirname $0)
 QUEUE=$BASEDIR/queue.csv
+NEWITEM=$BASEDIR/new_item.csv
 LOG=$BASEDIR/log.csv
 
 # add directory to queue:
 if [[ $1 == "add" && $2 == "-A" ]] || [[ $1 == "add" && $2 == "." ]]
   then
   var=$(pwd)
-  echo "directory,$var,,\"$3\"" >> $QUEUE
+  echo "directory,$var," > $NEWITEM
 
 # add file to queue:
 elif [[ $1 == "add" ]]
   then
   var=$(pwd)
-  echo "file,$var,$2,\"$3\"" >> $QUEUE
+  echo "file,$var,$2" > $NEWITEM
 
 # add commit message
 elif [[ $1 == "commit" && $2 == "-m" ]]
   then
-    var=$(tail -2 queue.csv | head -1)
-    var=${var%\"}
-    var=${var%\"*}
-    var+=\"$3\"
-    echo $var
+    #get temp item that should be added to queue
+    ITEM=`cat $NEWITEM`
+    #check to make sure there actually is a temp item
+    SIZE=${#ITEM}
+    if [ $SIZE -gt 0 ]
+      then
+      echo "$ITEM,$3" >> $QUEUE
+      #clear the temp item
+      echo ""> $NEWITEM
+    else
+      echo "Please add an item first"
+    fi
 
 #display last line added to queue
 elif [[ $1 == "ll" ]]
