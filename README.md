@@ -23,8 +23,4 @@
   
 ## TODO / Current issues:
 
-1. git_off status sometimes removes an item from the queue. The status code needs to be fixed!
-
-2. install.sh can mess up a current queue and delete items. Possibly related to the above error?
-
-3. If your computer is not on when the cron job is scheduled to run, git_off will miss commiting an item for the day. There needs to be some redudant cron logic to check every hour or so that the job actually was run. 
+1. If your computer is not on when the cron job is scheduled to run, git_off will miss commiting an item for the day. There needs to be some redudant cron logic to check every hour or so that the job actually was run. 
