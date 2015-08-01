@@ -3,7 +3,7 @@
 #for testing
 terminal="/dev/pts/11"
 
-
+#store file locations
 BASEDIR=$(dirname $0)
 current_dir=$(pwd)
 
@@ -12,7 +12,7 @@ if [ $BASEDIR = '.' ]
   BASEDIR="$current_dir"
 fi
 
-echo $BASEDIR > /dev/pts/11
+echo $BASEDIR > $terminal
 
 QUEUE=$BASEDIR/queue.csv
 ERRORQUEUE=$BASEDIR/error_queue.csv
@@ -40,7 +40,7 @@ if echo "$GITSTATUS" | grep -q "merge issue";
   PROCEED=0
 else
   PROCEED=1
-  echo "git_off: no merge issues found!"
+  echo "git_off: no merge issues found!" > $terminal
 fi
 
 #make the commits if possible
@@ -58,7 +58,7 @@ if echo "$COMMIT" | grep -q "$COMMITPATTERN1";
    PROCEED=0
  else
    PROCEED=1
-   echo "git_off: no commit issues found!"
+   echo "git_off: no commit issues found!" > $terminal
 fi
 
 #if no errors, push to remote
@@ -73,7 +73,7 @@ if [ "$PROCEED" == 1 ]; then
   if echo "$PUSH" | grep -q "$PUSHPATTERN1";
    then
      PROCEED=1
-     echo "git_off: no push issues found!"
+     echo "git_off: no push issues found!" > $terminal
    else
      PROCEED=0
   fi
@@ -86,7 +86,7 @@ TIME=$(date +"%m-%d-%Y %r")
 # log status
 if [ "$PROCEED" == 1 ]; then
   echo "$TIME, SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
-  echo "git_off: SUCCESS in pushing to remote repo"
+  echo "git_off: SUCCESS in pushing to remote repo" > $terminal
 else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
   # echo "$TIME, ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
