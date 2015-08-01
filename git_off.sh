@@ -51,8 +51,8 @@ elif [[ $1 == "commit" && $2 == "-m" ]]
 elif [[ $1 == "-ll" ]]
   then
     LASTLINE=$(tail -1 $QUEUE | head -1)
-    IFS=', ' read -a LLARRAY <<< "$LASTLINE"
-
+    IFS=',' read -a LLARRAY <<< "$LASTLINE"
+    # arr=$(echo $LASTLINE | tr "," "\n")
     NUMOFLINES=$(wc -l < "$QUEUE")
 
     ITEMTYPE="${LLARRAY[0]}"
