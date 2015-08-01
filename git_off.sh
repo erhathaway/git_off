@@ -67,22 +67,28 @@ elif [[ ! -d .git ]] && [[ $1 == "add" || $1 == "commit" ]]
 elif [[ $1 == "ll" ]]
   then
     LASTLINE=$(tail -1 $QUEUE | head -1)
-    IFS=',' read -a LLARRAY <<< "$LASTLINE"
-    # arr=$(echo $LASTLINE | tr "," "\n")
-    NUMOFLINES=$(wc -l < "$QUEUE")
-
-    ITEMTYPE="${LLARRAY[0]}"
-    DIRECTORY="${LLARRAY[1]}"
-    NAME="${LLARRAY[2]}"
-    COMMENT="${LLARRAY[3]}"
-
-    echo $'\tID \tItem Type  \tItem
-    ---------------------------------------------------------------------'
-    if [[ $ITEMTYPE == "directory" ]]
+    SIZE=${#LASTLINE}
+    if [ $SIZE -gt 0 ]
       then
-        echo $'\t' $NUMOFLINES $'\t' "directory: " $DIRECTORY $'\t\t' $COMMENT
+      IFS=',' read -a LLARRAY <<< "$LASTLINE"
+      # arr=$(echo $LASTLINE | tr "," "\n")
+      NUMOFLINES=$(wc -l < "$QUEUE")
+
+      ITEMTYPE="${LLARRAY[0]}"
+      DIRECTORY="${LLARRAY[1]}"
+      NAME="${LLARRAY[2]}"
+      COMMENT="${LLARRAY[3]}"
+
+      echo $'\tID \tItem Type  \tItem
+      ---------------------------------------------------------------------'
+      if [[ $ITEMTYPE == "directory" ]]
+        then
+          echo $'\t' $NUMOFLINES $'\t' "directory: " $DIRECTORY $'\t\t' $COMMENT
+      else
+          echo $'\t' $NUMOFLINES $'\t' "file:      " $DIRECTORY/$NAME$'\t\t'  $COMMENT
+      fi
     else
-        echo $'\t' $NUMOFLINES $'\t' "file:      " $DIRECTORY/$NAME$'\t\t'  $COMMENT
+      echo "nothing in the queue"
     fi
 
 # display queue status:
