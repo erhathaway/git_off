@@ -13,46 +13,55 @@ NEWITEM=$BASEDIR/new_item.csv
 LOG=$BASEDIR/log.csv
 ERRORQUEUE=$BASEDIR/error_queue.csv
 
-# add directory to queue:
-if [[ $1 == "add" && $2 == "-A" ]] || [[ $1 == "add" && $2 == "." ]]
+#check if git directory exists
+if [[ -d .git ]] && [[ $1 == "add" || $1 == "commit" ]]
   then
-  var=$(pwd)
-  echo "directory,$var," > $NEWITEM
-
-# add file to queue:
-elif [[ $1 == "add" ]]
-  then
-  var=$(pwd)
-  FILENAMESIZE=${#2}
-  # check to make sure an input was provided
-  if [ $FILENAMESIZE -gt 0 ]
+  # add directory to queue:
+  if [[ $1 == "add" && $2 == "-A" ]] || [[ $1 == "add" && $2 == "." ]]
     then
-      # check if file exists
-      if [ -e "$var/$2" ]
+    var=$(pwd)
+    echo "directory,$var," > $NEWITEM
+
+  # add file to queue:
+  elif [[ $1 == "add" ]]
+    then
+    var=$(pwd)
+    FILENAMESIZE=${#2}
+    # check to make sure an input was provided
+    if [ $FILENAMESIZE -gt 0 ]
+      then
+        # check if file exists
+        if [ -e "$var/$2" ]
+          then
+          echo "file,$var,$2" > $NEWITEM
+        else
+          echo "Could not find file"
+        fi
+    else
+      echo "Please specify a file to add to the queue"
+    fi
+
+  # add commit message
+  elif [[ $1 == "commit" && $2 == "-m" ]]
+    then
+      #get temp item that should be added to queue
+      ITEM=`cat $NEWITEM`
+      #check to make sure there actually is a temp item
+      SIZE=${#ITEM}
+      if [ $SIZE -gt 0 ]
         then
-        echo "file,$var,$2" > $NEWITEM
+        echo "$ITEM,$3" >> $QUEUE
+        #clear the temp item
+        echo ""> $NEWITEM
       else
-        echo "Could not find file"
+        echo "Please add an item first"
       fi
-  else
-    echo "Please specify a file to add to the queue"
   fi
 
-# add commit message
-elif [[ $1 == "commit" && $2 == "-m" ]]
+#when no git directory is found
+elif [[ ! -d .git ]] && [[ $1 == "add" || $1 == "commit" ]]
   then
-    #get temp item that should be added to queue
-    ITEM=`cat $NEWITEM`
-    #check to make sure there actually is a temp item
-    SIZE=${#ITEM}
-    if [ $SIZE -gt 0 ]
-      then
-      echo "$ITEM,$3" >> $QUEUE
-      #clear the temp item
-      echo ""> $NEWITEM
-    else
-      echo "Please add an item first"
-    fi
+    echo "no git directory found"
 
 #display last line added to queue
 elif [[ $1 == "ll" ]]
