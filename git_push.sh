@@ -47,8 +47,9 @@ fi
 
 
 #check push  status
-PUSH=$(cd $DIRECTORY && git push &>>temp.txt)
+PUSH=$(cd $DIRECTORY && git push 2>&1 | tee -a temp.txt)
 
+# | tee -a some_file
 # Writing objects: 100% (104/104), 8.44 KiB | 0 bytes/s, done.
 # Total 104 (delta 70), reused 0 (delta 0)
 # To git@github.com:erhathaway/git_off.git
