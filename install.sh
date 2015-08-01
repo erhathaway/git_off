@@ -4,6 +4,7 @@
 LOCATION=$HOME/.git_off
 USERFILE="git_off.sh"
 CRONFILE="git_check.sh"
+PUSHFILE="git_push.sh"
 QUEUE="queue.csv"
 
 #make files executable
@@ -18,6 +19,7 @@ fi
 #copy files into directory
 cp -f $USERFILE $LOCATION/
 cp -f $CRONFILE $LOCATION/
+cp -f $PUSHFILE $LOCATION/
 touch $LOCATION/$QUEUE
 
 #check to make sure chron is running

@@ -31,9 +31,9 @@ fi
 
 #make the commits or add to error queue
 if [ "$ITEMTYPE" = "directory" ] && [ "$PROCEED" = 1 ]; then
-  # cd $DIRECTORY && git add -A && git commit -m $COMMENT
+  cd $DIRECTORY && git add -A && git commit -m $COMMENT
 elif [ "$ITEMTYPE" = "file" ] && [ "$PROCEED" = 1 ]; then
-  # cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
+  cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
 fi
