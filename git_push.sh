@@ -36,10 +36,10 @@ fi
 
 #make the commits or add to error queue
 if [ "$ITEMTYPE" == "directory" ] && [ "$PROCEED" == 1 ]; then
-  cd $DIRECTORY && git add -A && git commit -m $COMMENT
+  eval "cd $DIRECTORY && git add -A && git commit -m $COMMENT"
   # echo "test"
 elif [ "$ITEMTYPE" == "file" ] && [ "$PROCEED" == 1 ]; then
-  cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
+  eval "cd $DIRECTORY && git add $NAME && git commit -m $COMMENT"
   # echo "test"
 else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
@@ -48,9 +48,9 @@ fi
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
   # cd $DIRECTORY && git push
-  cd $BASEDIR
-  echo $BASEDIR
-  echo `pwd`
+  # cd $BASEDIR
+  # echo $BASEDIR
+  # echo `pwd`
   echo "$(date), SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
 else
   echo "$(date), ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
