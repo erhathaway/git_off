@@ -42,7 +42,7 @@ if [ "$ITEMTYPE" == "directory" ] && [ "$PROCEED" == 1 ]; then
 elif [ "$ITEMTYPE" == "file" ] && [ "$PROCEED" == 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
 fi
-
+echo $COMMIT
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
   PUSH=$(cd $DIRECTORY && git push --progress 2>&1)
