@@ -17,10 +17,12 @@
 - `add filename`  add file
 - `commit -m "message"`     commit message
 - `status`        display current queue
+- `log`           display log of successful commits
+- `log -e`        display log of unsuccessful commits
 - `rm queue_id`   remove an item from the queue
 - `ll`            display last item added to queue'
-  
-  
+
+
 ## TODO / Current issues:
 
-1. If your computer is not on when the cron job is scheduled to run, git_off will miss commiting an item for the day. There needs to be some redudant cron logic to check every hour or so that the job actually was run. 
+1. If your computer is not on when the cron job is scheduled to run, git_off will miss commiting an item for the day. There needs to be some redudant cron logic to check every hour or so that the job actually was run.
