@@ -45,10 +45,20 @@ else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
 fi
 
+
+#check push  status
+# Writing objects: 100% (104/104), 8.44 KiB | 0 bytes/s, done.
+# Total 104 (delta 70), reused 0 (delta 0)
+# To git@github.com:erhathaway/git_off.git
+
+#get time
+TIME=$(date +"%m-%d-%Y %r")
+
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
   cd $DIRECTORY && git push
-  echo "$(date), SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
+
+  echo "$TIME, SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
 else
-  echo "$(date), ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
+  echo "$TIME, ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
 fi
