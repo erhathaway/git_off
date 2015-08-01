@@ -7,7 +7,7 @@ LOG=$BASEDIR/log.csv
 
 #Retrive item from queue
 LINE=$(sed -n '1p' $QUEUE) #queue.csv)
-sed -i '1d' $QUEUE
+# sed -i '1d' $QUEUE
 
 #Parse item into components
 set -- "$LINE"
@@ -40,7 +40,7 @@ fi
 
 #if no errors, push to remote
 if [ "$PROCEED" = 1 ]; then
-  cd $DIRECTORY && git push
+  # cd $DIRECTORY && git push
   echo "$(date),SUCCESS,$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $LOG
 else
   echo "$(date),ERROR,${ITEMTYPE},${DIRECTORY},${NAME},${COMMENT}" >> $LOG
