@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# source $HOME/.bash_profile
 
 #for testing
 terminal="/dev/pts/11"
 echo "-------------" > $terminal
+source $HOME/.bash_profile
+
 echo $HOME > $terminal
 printenv > $terminal
 echo "-------------" > $terminal
