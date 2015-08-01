@@ -49,11 +49,11 @@ fi
 #check push  status
 STATUS=""
 echo 'hello'
-PUSH=$(cd $DIRECTORY && git push 2>&1 >> bar)
+PUSH<<$(cd $DIRECTORY && git push 2>&1)
 
 echo 'hi'
 echo $PUSH
-echo $bar
+# echo $bar
 echo $STATUS
 
 # Writing objects: 100% (104/104), 8.44 KiB | 0 bytes/s, done.
