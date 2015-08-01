@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#for testing
+terminal="/dev/pts/11"
+
+
 BASEDIR=$(dirname $0)
 current_dir=$(pwd)
 
