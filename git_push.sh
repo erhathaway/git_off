@@ -47,14 +47,7 @@ fi
 
 
 #check push  status
-STATUS=""
-echo 'hello'
-stdbuf -oL git push  |
-  while IFS= read -r line; do lines[i]=2>&1; ((i++)); done
-  echo "${lines[1]}"
-
-echo 'hi'
-echo $STATUS
+PUSH=$(cd $DIRECTORY && git push 2>&1>>temp.txt)
 
 # Writing objects: 100% (104/104), 8.44 KiB | 0 bytes/s, done.
 # Total 104 (delta 70), reused 0 (delta 0)
