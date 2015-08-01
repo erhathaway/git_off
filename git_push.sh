@@ -46,7 +46,7 @@ fi
 # check the commit status
 COMMITPATTERN1="nothing to commit"
 
-if echo "$COMMIT" | grep -q -e "$COMMITPATTERN1";
+if echo "$COMMIT" | grep -q "$COMMITPATTERN1";
  then
    PROCEED=0
  else
@@ -62,7 +62,7 @@ if [ "$PROCEED" == 1 ]; then
   # PATTERN2="Total" #other patterns that may be helpful
   # PATTERN3="done."
 
-  if echo "$PUSH" | grep -q -e "$PUSHPATTERN1";
+  if echo "$PUSH" | grep -q "$PUSHPATTERN1";
    then
      PROCEED=1
    else
