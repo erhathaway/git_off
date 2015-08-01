@@ -4,6 +4,7 @@
 
 #for testing
 terminal="/dev/pts/11"
+echo "-------------" > $terminal
 echo $HOME > $terminal
 echo "-------------" > $terminal
 
