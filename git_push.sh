@@ -36,34 +36,38 @@ else
   PROCEED=1
 fi
 
-#make the commits or add to error queue
+#make the commits if possible
 if [ "$ITEMTYPE" == "directory" ] && [ "$PROCEED" == 1 ]; then
   cd $DIRECTORY && git add -A && git commit -m $COMMENT
 elif [ "$ITEMTYPE" == "file" ] && [ "$PROCEED" == 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
-else
-  echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
 fi
 
+#if no errors, push to remote
+if [ "$PROCEED" == 1 ]; then
+  PUSH=$(cd $DIRECTORY && git push --progress 2>&1)
+fi
 
-#check push  status
-PUSH=$(cd $DIRECTORY && git push --progress 2>&1)
+#check push status
+PATTERN1="Writing objects: 100%"
+PATTERN2="Total"
+PATTERN3="done."
 
-
-echo 'hi'
-# echo $PUSH
-# Writing objects: 100% (104/104), 8.44 KiB | 0 bytes/s, done.
-# Total 104 (delta 70), reused 0 (delta 0)
-# To git@github.com:erhathaway/git_off.git
+if echo "$PUSH" | grep -q "$PATTERN1";
+ then
+   PROCEED=1
+ else
+   PROCEED=0
+fi
 
 #get time
 TIME=$(date +"%m-%d-%Y %r")
 
-#if no errors, push to remote
+# log status
 if [ "$PROCEED" == 1 ]; then
-  # cd $DIRECTORY && git push
-
   echo "$TIME, SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
+
 else
+  echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
   echo "$TIME, ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
 fi
