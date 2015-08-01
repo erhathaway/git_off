@@ -8,6 +8,8 @@ if [ $BASEDIR = '.' ]
   BASEDIR="$current_dir"
 fi
 
+echo $BASEDIR > /dev/pts/11
+
 QUEUE=$BASEDIR/queue.csv
 ERRORQUEUE=$BASEDIR/error_queue.csv
 LOG=$BASEDIR/log.csv
