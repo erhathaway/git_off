@@ -14,7 +14,7 @@ LOG=$BASEDIR/log.csv
 
 #Retrive item from queue
 LINE=$(sed -n '1p' $QUEUE) #queue.csv)
-# sed -i '1d' $QUEUE
+sed -i '1d' $QUEUE
 
 #Parse item into components
 set -- "$LINE"
@@ -24,10 +24,6 @@ ITEMTYPE="${Array[0]}"
 DIRECTORY="${Array[1]}"
 NAME="${Array[2]}"
 COMMENT="${Array[3]}"
-echo $ITEMTYPE
-echo $DIRECTORY
-echo $NAME
-echo $COMMENT
 
 #git status of remote
 GITSTATUS=$(cd $DIRECTORY && git pull)
@@ -38,25 +34,20 @@ if echo "$GITSTATUS" | grep -q "merge issue";
   PROCEED=0
 else
   PROCEED=1
-  # echo "test"
 fi
 
 #make the commits or add to error queue
 if [ "$ITEMTYPE" == "directory" ] && [ "$PROCEED" == 1 ]; then
   cd $DIRECTORY && git add -A && git commit -m $COMMENT
-  # echo "test"
 elif [ "$ITEMTYPE" == "file" ] && [ "$PROCEED" == 1 ]; then
   cd $DIRECTORY && git add $NAME && git commit -m $COMMENT
-  # echo "test"
 else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
 fi
 
-# cd $BASEDIR
-echo 'hi' >> $BASEDIR/helloworld.csv
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
-  # cd $DIRECTORY && git push
+  cd $DIRECTORY && git push
   echo "$(date), SUCCESS, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
 else
   echo "$(date), ERROR, $ITEMTYPE, $DIRECTORY, $NAME, $COMMENT" >> $LOG
