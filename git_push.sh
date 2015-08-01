@@ -1,6 +1,13 @@
 #!/bin/bash
 
 BASEDIR=$(dirname $0)
+current_dir=$(pwd)
+
+if [ $BASEDIR = '.' ]
+  then
+  BASEDIR="$current_dir"
+fi
+
 QUEUE=$BASEDIR/queue.csv
 ERRORQUEUE=$BASEDIR/error_queue.csv
 LOG=$BASEDIR/log.csv
