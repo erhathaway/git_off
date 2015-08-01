@@ -47,7 +47,7 @@ fi
 
 
 #check push  status
-PUSH=$(cd $DIRECTORY && git push 2>&1 | tee -a temp.txt)
+PUSH=$(cd $DIRECTORY && git push 3>&1 | tee -a temp.txt)
 
 # | tee -a some_file
 # Writing objects: 100% (104/104), 8.44 KiB | 0 bytes/s, done.
