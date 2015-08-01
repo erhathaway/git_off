@@ -17,6 +17,10 @@ ITEMTYPE="${Array[0]}"
 DIRECTORY="${Array[1]}"
 NAME="${Array[2]}"
 COMMENT="${Array[3]}"
+echo $ITEMTYPE
+echo $DIRECTORY
+echo $NAME
+echo $COMMENT
 
 #git status of remote
 GITSTATUS=$(cd $DIRECTORY && git pull)
