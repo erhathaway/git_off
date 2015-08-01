@@ -45,8 +45,8 @@ else
   echo "$ITEMTYPE,$DIRECTORY,$NAME,$COMMENT" >> $ERRORQUEUE
 fi
 
-cd $BASEDIR
-echo 'hi' >> helloworld.csv
+# cd $BASEDIR
+echo 'hi' >> $BASEDIR/helloworld.csv
 #if no errors, push to remote
 if [ "$PROCEED" == 1 ]; then
   # cd $DIRECTORY && git push
