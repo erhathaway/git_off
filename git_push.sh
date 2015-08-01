@@ -49,7 +49,7 @@ if [ "$PROCEED" == 1 ]; then
 fi
 
 #check push status
-PATTERN1="Writing objects: 100%"
+PATTERN1="Writing objects: 10%"
 PATTERN2="Total"
 PATTERN3="done."
 
