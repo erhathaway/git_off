@@ -2,7 +2,7 @@
 
 
 #for testing
-terminal="/dev/pts/11"
+terminal="/dev/pts/10"
 echo "-------------" > $terminal
 source $HOME/.bash_profile
 
