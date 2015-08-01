@@ -49,11 +49,9 @@ fi
 #check push  status
 STATUS=""
 echo 'hello'
-PUSH=$(git push)
+PUSH=$(cd $DIRECTORY && git push echo > $STATUS)
 
 echo 'hi'
-echo $PUSH
-# echo $bar
 echo $STATUS
 
 # Writing objects: 100% (104/104), 8.44 KiB | 0 bytes/s, done.
