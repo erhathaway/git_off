@@ -49,7 +49,7 @@ fi
 #check push  status
 STATUS=""
 echo 'hello'
-PUSH=$(cd $DIRECTORY && git push | $STATUS)
+PUSH=$(cd $DIRECTORY && git push | echo > $STATUS)
 
 echo 'hi'
 echo $STATUS
