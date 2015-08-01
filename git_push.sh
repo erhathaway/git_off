@@ -4,7 +4,7 @@
 
 #for testing
 terminal="/dev/pts/11"
-clear
+$(clear)
 echo $HOME > terminal
 echo "-------------" > terminal
 
