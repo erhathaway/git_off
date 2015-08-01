@@ -48,6 +48,7 @@ fi
 
 #check push  status
 STATUS=""
+echo 'hello'
 PUSH=$(cd $DIRECTORY && git push | $STATUS)
 
 echo 'hi'
