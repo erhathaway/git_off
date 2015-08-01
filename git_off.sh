@@ -48,7 +48,7 @@ elif [[ $1 == "commit" && $2 == "-m" ]]
     fi
 
 #display last line added to queue
-elif [[ $1 == "-ll" ]]
+elif [[ $1 == "ll" ]]
   then
     LASTLINE=$(tail -1 $QUEUE | head -1)
     IFS=',' read -a LLARRAY <<< "$LASTLINE"
@@ -114,7 +114,7 @@ elif [[ $1 == "log" ]]
   fi
 
 #remove item from queue by queue ID
-elif [[ $1 == "-rm" && $2 ]]
+elif [[ $1 == "rm" && $2 ]]
   then
   sed -n "$2p" $QUEUE >> $LOG
   sed -i".bak" "$2d" $QUEUE
@@ -136,7 +136,7 @@ Available commands\n
   log -e --clear clear error queue log
 
 
-  -rm queue_id   remove an item from the queue
-  -ll            display last item added to queue'
+  rm queue_id   remove an item from the queue
+  ll            display last item added to queue'
 
 fi
