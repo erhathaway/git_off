@@ -3,7 +3,7 @@
 
 **Use:** Similar to git except files or directories you add are put into a queue. Once a day, the queue is checked, and the first item is commited and pushed up to the remote repo
 
-**Install**
+**Install:**
 
 1. Clone / download repo
 2. `cd` into repo
