@@ -27,4 +27,4 @@
 
 ## TODO / Current issues:
 
-1. Linux (and possible Mac) issue. SSH keys are not accessible to cron job. Git `push` and `pull` fail.  
+1. Test that git `push` and `pull` work with cron job. There may be an issue on some systems accessing SSH environmental variables. Please let me know if you experience this (or any other errors).
