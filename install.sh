@@ -6,6 +6,7 @@ USERFILE="git_off.sh"
 CRONFILE="git_check.sh"
 PUSHFILE="git_push.sh"
 QUEUE="queue.csv"
+SSH=$SSH_AUTH_SOCK
 
 #make files executable
 chmod +x $USERFILE
