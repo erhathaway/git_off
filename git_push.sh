@@ -2,7 +2,7 @@
 
 
 #for testing
-terminal=""
+terminal="/dev/null"
 # terminal="/dev/pts/10"
 # echo "-------------" > $terminal
 # # export SSH_AUTH_SOCK=/run/user/1000/keyring-r9YizP/ssh
