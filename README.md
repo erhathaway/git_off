@@ -29,6 +29,9 @@
 
 1. Test that git `push` and `pull` work with cron job. There may be an issue on some systems accessing SSH environmental variables. Please let me know if you experience this (or any other errors).
 
-2. Add support for file staging area. Aka, add multiple files and use one commit message
+2. Add support for file staging area. AKA, add multiple files and use one commit message
 
-3. Add time parameter to commit command. This parameter can be used to specify how long in the future until the commit should take place
+3. Add time parameter to commit command. This parameter can be used to specify how long in the future until the commit should take place.
+
+4. Add a `push` command to check the queue instantly and `push` to the remote if anything is found. 
+
