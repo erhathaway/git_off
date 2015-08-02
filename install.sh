@@ -42,7 +42,7 @@ if echo "$FILE" | grep -q "$PATTERN";
   echo "already a cron job!"
  else
  line="SSH_AUTH_SOCK=$SSH
- */1 * * * * $LOCATION/$CRONFILE"
+ */30 * * * * $LOCATION/$CRONFILE"
 
   # line="*/30 * * * * . $HOME/.profile; $LOCATION/$CRONFILE"
   # line="*/1 * * * * bash -l -c $LOCATION/$CRONFILE"
