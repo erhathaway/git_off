@@ -4,7 +4,7 @@
 #for testing
 terminal="/dev/pts/10"
 echo "-------------" > $terminal
-export SSH_AUTH_SOCK=/run/user/1000/keyring-r9YizP/ssh
+# export SSH_AUTH_SOCK=/run/user/1000/keyring-r9YizP/ssh
 
 source $HOME/.bash_profile
 
