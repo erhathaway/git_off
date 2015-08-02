@@ -2,13 +2,15 @@
 
 
 #for testing
-# terminal="/dev/pts/10"
-# echo "-------------" > $terminal
-# source $HOME/.bash_profile
-#
-# echo $HOME > $terminal
-# printenv > $terminal
-# echo "-------------" > $terminal
+terminal="/dev/pts/10"
+echo "-------------" > $terminal
+export SSH_AUTH_SOCK=/run/user/1000/keyring-r9YizP/ssh
+
+source $HOME/.bash_profile
+
+echo $HOME > $terminal
+printenv > $terminal
+echo "-------------" > $terminal
 
 #store file locations
 BASEDIR=$(dirname $0)
@@ -27,7 +29,7 @@ LOG=$BASEDIR/log.csv
 
 #Retrive item from queue
 LINE=$(sed -n '1p' $QUEUE) #queue.csv)
-sed -i '1d' $QUEUE
+# sed -i '1d' $QUEUE
 
 #Parse item into components
 set -- "$LINE"
