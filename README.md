@@ -16,6 +16,7 @@
 - `add .`               add directory
 - `add filename`        add file
 - `commit -m "message"` commit message
+- `push`                push available items in queue to remote
 - `status`              display current queue
 - `log`                 display log of successful commits
 - `log -e`              display error queue log (aka unsuccessful commits)
@@ -32,6 +33,4 @@
 2. Add support for file staging area. AKA, add multiple files and use one commit message
 
 3. Add time parameter to commit command. This parameter can be used to specify how long in the future until the commit should take place.
-
-4. Add a `push` command to check the queue instantly and `push` to the remote if anything is found. 
 
