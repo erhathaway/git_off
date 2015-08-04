@@ -157,7 +157,7 @@ Available commands\n
   add filename   add file
 
   commit -m      commit message
-  push           push all available items in queue
+  push           push all available items in queue to remote
 
   status         display current queue
   log            display log of successful commits
