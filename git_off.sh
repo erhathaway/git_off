@@ -12,6 +12,8 @@ QUEUE=$BASEDIR/queue.csv
 NEWITEM=$BASEDIR/new_item.csv
 LOG=$BASEDIR/log.csv
 ERRORQUEUE=$BASEDIR/error_queue.csv
+GITCHECK=$BASEDIR/git_check.sh
+
 
 #check if git directory exists
 if [[ -d .git ]] && [[ $1 == "add" || $1 == "commit" ]]
@@ -62,6 +64,12 @@ if [[ -d .git ]] && [[ $1 == "add" || $1 == "commit" ]]
 elif [[ ! -d .git ]] && [[ $1 == "add" || $1 == "commit" ]]
   then
     echo "no git directory found"
+
+
+#push all available items to remote repo
+elif [[ $1 == "push" ]]
+  then
+  ($GITCHECK)
 
 #display last line added to queue
 elif [[ $1 == "ll" ]]
@@ -149,6 +157,7 @@ Available commands\n
   add filename   add file
 
   commit -m      commit message
+  push           push all available items in queue
 
   status         display current queue
   log            display log of successful commits
